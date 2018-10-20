@@ -23,8 +23,7 @@ public:
 		xhigh = array.size()-1;//行数
 		xmid = (xlow + xhigh) >> 1;
 		//注意low high应该是size-1的问题 避免low=mid+1之后==high进而越界访问
-		while (xlow<xhigh) {//这里xlow<xhigh即可，不要取等于，会导致下界搜索死循环 low=mid=high
-		    //用<可以涵盖的原因是low=high-1的时候 mid=low 如果偏小 low=high=mid+1 这时下面正好进行了==的判断
+		while (xlow<xhigh) {		
 			ylow = 0, yhigh = array[xmid].size()-1;//列数
 			ymid = (ylow + yhigh) >> 1;
 			while (ylow<yhigh) {
@@ -46,10 +45,24 @@ public:
 			}
 			xmid = (xlow + xhigh) >> 1;
 		}
+		//****注意：由于是二维数组，这里low=high的情况还需要搜索这一行
+		ylow = 0, yhigh = array[xmid].size() - 1;//列数
+		ymid = (ylow + yhigh) >> 1;
+		while (ylow<yhigh) {
+			if (array[xmid][ymid] == target) return 1;
+			else if (array[xmid][ymid]>target) {
+				yhigh = ymid;
+			}
+			else if (array[xmid][ymid]<target) {
+				ylow = ymid + 1;
+			}
+			ymid = (ylow + yhigh) >> 1;
+		}
 		if (array[xmid][ymid] == target) return 1;
 		else return 0;
 	}
 };
+
 
 int main() {
 	vector<vector<int> > test(5);
