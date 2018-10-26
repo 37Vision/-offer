@@ -25,7 +25,7 @@ int minNumberInRotateArray(vector<int> rotateArray) {
     if(rotateArray.size()<=0) return 0;
     int p=0,q=rotateArray.size()-1;
 	if (rotateArray[p] < rotateArray[q]) return rotateArray[p];//如果没有进行翻转   特殊情况翻转元素数0
-    while(q-p>=2){//(0+2)/2=1 还有中间 
+    while(q-p>=2){//(0+2)/2=1 还有中间
         int mid=p+(q-p)/2;//这里如果用>>，注意优先级太低了，会导致计算结果不一致，就得加括号，所以直接/2也可以
         if(rotateArray[p]>rotateArray[mid]){
             q=mid;//可能是最小值
