@@ -7,8 +7,8 @@ public:
         for(int i=3;i<=n;i++){
             newresult=result+last;
             last=result;
-            result=newresult;
-        }
+            result=newresult;//比较简单可以不用使用动态规划，但是如果比较复杂就可以使用动态规划
+        }//另外递归的实现也比较有意思
         return result;
     }
 };
